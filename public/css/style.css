@@ -1,0 +1,34 @@
+.wrapper{
+    padding-top: 50px;
+}
+
+.title{
+    text-align: center;
+    font-size: 50px;
+}
+
+.info{
+    height: 500px;
+    width: 800px;
+    margin: auto;
+    border: 2px solid;
+    position: relative;
+}
+
+.info.load:after{
+    content: '';
+    background: url('../image/loading_spinner.gif') no-repeat center;
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    top: 0;
+}
+
+.content{
+    margin: 10px 0;
+}
+
+.content .form-group{
+    text-align: center;
+}

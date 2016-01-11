@@ -8,11 +8,12 @@
               crossorigin="anonymous">
     </head>
     <body>
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
         <div class="wrapper">
             <div class="title">Tenders</div>
             <div id="infoBlock" class="info"></div>
         </div>
-        <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
         <script src="/js/ajax.js"></script>
     </body>
 </html>

@@ -1,5 +1,6 @@
 .wrapper{
     padding-top: 50px;
+    position: relative;
 }
 
 .title{
@@ -13,22 +14,30 @@
     margin: auto;
     border: 2px solid;
     position: relative;
+    overflow-y: auto;
+    padding: 20px;
 }
 
-.info.load:after{
+.wrapper.load:after{
     content: '';
     background: url('../image/loading_spinner.gif') no-repeat center;
     width: 100%;
     height: 100%;
     display: block;
     position: absolute;
-    top: 0;
-}
-
-.content{
-    margin: 10px 0;
+    top: 50px;
 }
 
 .content .form-group{
     text-align: center;
+}
+
+.add-btn{
+    width: 60px;
+    display: block!important;
+    margin: 15px auto;
+}
+
+.errors{
+    color: red;
 }

@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Tender;
 use Illuminate\Http\Request;
-
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TenderStoreRequest;
 
 class TenderController extends Controller
 {
@@ -28,7 +28,7 @@ class TenderController extends Controller
     public function create(Tender $tender)
     {
         return view('tender.create', [
-            'model' => $tender
+            'tender' => $tender
         ]);
     }
 
@@ -38,9 +38,21 @@ class TenderController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TenderStoreRequest $request)
     {
-        //
+        $data = $request->all();
+
+        $extension = $request->file('photo')->getClientOriginalExtension();
+
+        $file_name = uniqid() . '.' . $extension;
+
+        $request->file('photo')->move('uploads/', $file_name);
+
+        $data['photo'] = $file_name;
+
+        Tender::create($data);
+
+        echo json_encode(['success']);
     }
 
     /**

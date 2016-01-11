@@ -1,30 +1,54 @@
 
 $(document).ready(function () {
+    ajaxLink('/tender');
+});
+
+$('body').on('click', '#createNew', function () {
+    ajaxLink('/tender/create');
+});
+
+$('body').on('click', '#addTender', function () {
+    $('#description').text(CKEDITOR.instances.description.getData());
+
     $.ajax({
         url: '/tender',
-        type: 'get',
-        dataType: 'html',
+        type: 'post',
+        dataType: 'json',
+        data: new FormData( $("form")[0] ),
+        cache: false,
+        contentType: false,
+        processData: false,
         beforeSend: function(){
-            $('#infoBlock').addClass('load');
+            $('.wrapper').addClass('load');
+            $('.errors').remove();
         },
         success: function(data){
-            $('#infoBlock').removeClass('load');
-            $('#infoBlock').html(data);
+            $('.wrapper').removeClass('load');
+            ajaxLink('/tender');
+        },
+        error: function(data){
+            $('.wrapper').removeClass('load');
+            var errors = data.responseJSON;
+
+            $.each(errors, function(index, value) {
+                $('#' + index).after('<div class="errors">' + value + '</div>');
+            });
         }
     });
 });
 
-$('body').on('click', '#createNew', function () {
+
+function ajaxLink(link){
     $.ajax({
-        url: '/tender/create',
+        url: link,
         type: 'get',
         dataType: 'html',
         beforeSend: function(){
-            $('#infoBlock').addClass('load');
+            $('.wrapper').addClass('load');
         },
         success: function(data){
-            $('#infoBlock').removeClass('load');
+            $('.wrapper').removeClass('load');
             $('#infoBlock').html(data);
         }
     });
-});
+}

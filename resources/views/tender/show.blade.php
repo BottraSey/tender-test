@@ -20,7 +20,7 @@
         <strong>Phone: {{$tender->phone}}</strong>
     </div>
     <div class="form-group">
-        <strong>Active days: {{$tender->active_date}}</strong>
+        <strong>Active days: {{$tender->days_count}}</strong>
     </div>
     <div class="form-group">
         <strong>Status: {{$tender->status}}</strong>

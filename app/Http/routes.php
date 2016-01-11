@@ -15,8 +15,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('tender/deleted', 'TenderController@deleted');
-Route::get('tender/restore/{tender}', 'TenderController@restore');
-Route::get('tender/delete/{tender}', 'TenderController@delete');
+Route::group(['prefix' => 'tender'], function(){
+    Route::get('deleted', 'TenderController@deleted');
+    Route::get('restore/{tender}', 'TenderController@restore');
+    Route::get('delete/{tender}', 'TenderController@delete');
+    Route::get('filter/{filter}', 'TenderController@filter');
+});
+
 
 Route::resource('tender', 'TenderController');

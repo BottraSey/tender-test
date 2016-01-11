@@ -2,6 +2,13 @@
 <div class="content">
     <div class="form-group">
         @include('blocks.navigate')
+        {!! Form::select('status',[
+            'active' => 'all',
+            'open' => 'open',
+            'close' => 'close',
+        ], $filter, [
+            'class' => 'form-control filter'
+        ]) !!}
     </div>
         <table class="table">
             <tr>

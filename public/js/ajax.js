@@ -40,6 +40,10 @@ $('body').on('click', '#saveTender', function () {
     ajaxSubmit('/tender/' + $(this).attr('data-id'));
 });
 
+$('body').on('change', '.filter', function(){
+    ajaxLink('/tender/filter/' + $(this).val());
+});
+
 function ajaxSubmit(link, type){
 
     $('#description').text(CKEDITOR.instances.description.getData());

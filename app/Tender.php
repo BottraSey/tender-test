@@ -32,6 +32,16 @@ class Tender extends Model
         return $query->whereStatus('delete');
     }
 
+    public function scopeOpen($query)
+    {
+        return $query->whereStatus('open');
+    }
+
+    public function scopeClose($query)
+    {
+        return $query->whereStatus('close');
+    }
+
     public function getDaysCountAttribute()
     {
         $dtime = ceil((Carbon::createFromFormat('Y-m-d H:i:s', $this->getAttribute('active_date'))->getTimestamp()
@@ -42,5 +52,10 @@ class Tender extends Model
     public function getFormatDateAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->getAttribute('active_date'))->format('m/d/Y');
+    }
+
+    public function filter($filter)
+    {
+        return $this->$filter()->get();
     }
 }

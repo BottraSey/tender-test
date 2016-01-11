@@ -45,3 +45,8 @@ img{
     margin: auto;
     max-width: 220px!important;
 }
+
+.filter{
+    float: right;
+    width: 24%!important;
+}

@@ -22,9 +22,20 @@ class TenderController extends Controller
 
         return view('tender.index', [
             'tender' => $data,
+            'filter' => 'all',
         ]);
     }
 
+    public function filter($filter, Tender $tender)
+    {
+
+        $data = $tender->filter($filter);
+
+        return view('tender.index', [
+            'tender' => $data,
+            'filter' => $filter,
+        ]);
+    }
     /**
      * Show the form for creating a new resource.
      *

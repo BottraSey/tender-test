@@ -41,3 +41,7 @@
 .errors{
     color: red;
 }
+img{
+    margin: auto;
+    max-width: 220px!important;
+}

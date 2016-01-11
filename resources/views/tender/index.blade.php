@@ -1,6 +1,8 @@
 
 <div class="content">
-    @include('blocks.navigate')
+    <div class="form-group">
+        @include('blocks.navigate')
+    </div>
         <table class="table">
             <tr>
                 <td><strong>Tender name</strong></td>
@@ -13,7 +15,7 @@
                 <tr>
                     <td>{{$item->name}}</td>
                     <td>{{$item->author_name}}</td>
-                    <td>{{$item->active_date}}</td>
+                    <td>{{$item->days_count}}</td>
                     <td>{{$item->status}}</td>
                     <td>
                         {!!Form::button('view',[

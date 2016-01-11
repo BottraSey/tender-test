@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TenderStoreRequest;
+use App\Http\Requests\TenderUpdateRequest;
 
 class TenderController extends Controller
 {
@@ -57,6 +58,12 @@ class TenderController extends Controller
         echo json_encode(['success']);
     }
 
+    /**
+     * View 'deleted' tenders
+     *
+     * @param Tender $tender
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function deleted(Tender $tender)
     {
         $data = $tender->deletedTender()->get();
@@ -66,6 +73,12 @@ class TenderController extends Controller
         ]);
     }
 
+    /**
+     * Change status to 'open'
+     *
+     * @param $tender
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function restore($tender)
     {
         $tender->status = 'open';
@@ -74,6 +87,12 @@ class TenderController extends Controller
         return redirect('/tender');
     }
 
+    /**
+     * Change status to 'delete'
+     *
+     * @param $tender
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
     public function delete($tender)
     {
         $tender->status = 'delete';
@@ -87,9 +106,11 @@ class TenderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($tender)
     {
-        //
+        return view('tender.show', [
+           'tender' => $tender,
+        ]);
     }
 
     /**
@@ -98,9 +119,11 @@ class TenderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($tender)
     {
-        //
+        return view('tender.edit', [
+            'tender' => $tender,
+        ]);
     }
 
     /**
@@ -110,19 +133,26 @@ class TenderController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TenderUpdateRequest $request, $tender)
     {
-        //
+        $data = $request->all();
+
+        if($request->file('photo')){
+            $extension = $request->file('photo')->getClientOriginalExtension();
+
+            $file_name = uniqid() . '.' . $extension;
+
+            $request->file('photo')->move('uploads/', $file_name);
+
+            $data['photo'] = $file_name;
+        }else{
+            $data['photo'] = $tender->photo;
+        }
+
+        $tender->update($data);
+
+        echo json_encode(['success']);
+
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 }

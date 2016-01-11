@@ -23,13 +23,30 @@ $('body').on('click', '.delete', function () {
     ajaxLink('/tender/delete/' + $(this).attr('data-id'));
 });
 
+$('body').on('click', '.view', function () {
+    ajaxLink('/tender/' + $(this).attr('data-id'));
+});
+
+$('body').on('click', '.edit', function () {
+    ajaxLink('/tender/' + $(this).attr('data-id') + '/edit');
+});
+
 
 $('body').on('click', '#addTender', function () {
-    $('#description').text(CKEDITOR.instances.description.getData());
+    ajaxSubmit('/tender');
+});
 
+$('body').on('click', '#saveTender', function () {
+    ajaxSubmit('/tender/' + $(this).attr('data-id'));
+});
+
+function ajaxSubmit(link, type){
+
+    $('#description').text(CKEDITOR.instances.description.getData());
+    var request_type = type || 'post';
     $.ajax({
-        url: '/tender',
-        type: 'post',
+        url: link,
+        type: request_type,
         dataType: 'json',
         data: new FormData( $("form")[0] ),
         cache: false,
@@ -52,8 +69,7 @@ $('body').on('click', '#addTender', function () {
             });
         }
     });
-});
-
+}
 
 function ajaxLink(link, type){
     var request_type = type || 'get';

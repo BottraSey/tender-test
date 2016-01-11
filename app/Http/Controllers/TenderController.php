@@ -15,9 +15,13 @@ class TenderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Tender $tender)
     {
-        return view('tender.index');
+        $data = $tender->active()->get();
+
+        return view('tender.index', [
+            'tender' => $data,
+        ]);
     }
 
     /**
@@ -25,11 +29,9 @@ class TenderController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Tender $tender)
+    public function create()
     {
-        return view('tender.create', [
-            'tender' => $tender
-        ]);
+        return view('tender.create');
     }
 
     /**
@@ -55,6 +57,30 @@ class TenderController extends Controller
         echo json_encode(['success']);
     }
 
+    public function deleted(Tender $tender)
+    {
+        $data = $tender->deletedTender()->get();
+
+        return view('tender.deleted', [
+            'tender' => $data,
+        ]);
+    }
+
+    public function restore($tender)
+    {
+        $tender->status = 'open';
+        $tender->save();
+
+        return redirect('/tender');
+    }
+
+    public function delete($tender)
+    {
+        $tender->status = 'delete';
+        $tender->save();
+
+        return redirect('/tender');
+    }
     /**
      * Display the specified resource.
      *

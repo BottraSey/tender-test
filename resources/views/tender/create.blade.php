@@ -1,9 +1,9 @@
-{!! Form::model($tender, [
+{!! Form::model('tender', [
     'route' => 'tender.store',
     'enctype' => 'multipart/form-data'
 ]) !!}
 
-@include('blocks.form', ['tender' => $tender])
+@include('blocks.form')
 
 {!! Form::button('Add', [
     'class' => 'btn btn-info add-btn',

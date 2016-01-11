@@ -1,12 +1,12 @@
 
 {!! Form::label('name', 'Name') !!}
-{!! Form::text('name', $tender->name, [
+{!! Form::text('name', '', [
     'class' => 'form-control',
     'id' => 'name'
 ]) !!}
 
 {!! Form::label('description', 'Description') !!}
-{!! Form::textarea('description', $tender->description, [
+{!! Form::textarea('description', '', [
     'class' => 'form-control',
     'id' => 'description'
 ]) !!}
@@ -18,19 +18,19 @@
 ]) !!}
 
 {!! Form::label('author_name', 'Author name') !!}
-{!! Form::text('author_name', $tender->author_name, [
+{!! Form::text('author_name', '', [
     'class' => 'form-control',
     'id' => 'author_name'
 ]) !!}
 
 {!! Form::label('phone', 'Phone') !!}
-{!! Form::text('phone', $tender->phone, [
+{!! Form::text('phone', '', [
     'class' => 'form-control',
     'id' => 'phone'
 ]) !!}
 
 {!! Form::label('active_date', 'Active date') !!}
-{!! Form::text('active_date', $tender->phone, [
+{!! Form::text('active_date', '', [
     'class' => 'form-control',
     'id' => 'active_date',
 ]) !!}
@@ -40,7 +40,7 @@
     'open' => 'open',
     'close' => 'close',
     'delete' => 'delete',
-], $tender->status, [
+], '', [
     'class' => 'form-control'
 ]) !!}
 
